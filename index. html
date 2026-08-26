@@ -1,0 +1,1235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CarBridge Global — Buy & Sell Cars</title>
+
+<style>
+:root{
+--bg:#f4f7fb;
+--card:#fff;
+--ink:#101828;
+--muted:#667085;
+--line:#e4e7ec;
+--brand:#0b63f6;
+--dark:#071225;
+--green:#12b76a;
+--orange:#f79009;
+--red:#d92d20;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{
+background:var(--dark);
+color:white;
+padding:16px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+position:sticky;
+top:0;
+z-index:10
+}
+.logo{font-size:22px;font-weight:900}
+.logo span{color:#5b9cff}
+nav{display:flex;gap:7px;flex-wrap:wrap}
+nav button{
+background:none;
+border:0;
+color:white;
+padding:10px;
+font-weight:700;
+cursor:pointer
+}
+.hero{
+background:linear-gradient(135deg,#071225,#1354a0);
+color:white;
+padding:55px 5%
+}
+.hero h1{font-size:clamp(38px,7vw,70px);margin:0 0 15px}
+.hero p{font-size:18px;color:#d0d5dd;max-width:760px}
+.container{max-width:1200px;margin:auto;padding:35px 5%}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card,.panel{
+background:white;
+border:1px solid var(--line);
+border-radius:16px;
+padding:20px;
+margin-bottom:20px;
+box-shadow:0 5px 20px #1018280b
+}
+.car-card{overflow:hidden;padding:0}
+.photo{
+height:190px;
+background:linear-gradient(135deg,#dbeafe,#eef2f6);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:70px
+}
+.body{padding:18px}
+.price{font-size:25px;font-weight:900;color:#087a48}
+.muted{color:var(--muted)}
+.badge{
+display:inline-block;
+padding:5px 9px;
+border-radius:20px;
+background:#ecfdf3;
+color:#027a48;
+font-size:11px;
+font-weight:800
+}
+button{
+border:0;
+border-radius:10px;
+padding:12px 16px;
+font-weight:800;
+cursor:pointer
+}
+.primary{background:var(--brand);color:white}
+.green{background:var(--green);color:white}
+.orange{background:var(--orange);color:white}
+.dark{background:var(--dark);color:white}
+.gray{background:#eef2f6;color:#344054}
+input,select,textarea{
+width:100%;
+padding:13px;
+border:1px solid var(--line);
+border-radius:10px;
+font:inherit
+}
+.field{margin-bottom:12px}
+.field label{
+display:block;
+font-size:12px;
+font-weight:800;
+color:var(--muted);
+margin-bottom:6px
+}
+.hidden{display:none!important}
+.kpis{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px
+}
+.kpi{
+background:white;
+border:1px solid var(--line);
+border-radius:14px;
+padding:18px
+}
+.kpi b{
+display:block;
+font-size:25px;
+margin-top:5px
+}
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#0009;
+z-index:100;
+align-items:center;
+justify-content:center;
+padding:18px
+}
+.modal.open{display:flex}
+.modalbox{
+background:white;
+width:100%;
+max-width:700px;
+max-height:92vh;
+overflow:auto;
+border-radius:18px;
+padding:25px
+}
+.close{
+float:right;
+background:#f2f4f7;
+border-radius:50%;
+width:35px;
+height:35px;
+padding:0
+}
+.total{
+background:#f8fafc;
+border:1px solid var(--line);
+padding:16px;
+border-radius:12px;
+margin:15px 0
+}
+.status{
+padding:6px 9px;
+border-radius:20px;
+font-size:11px;
+font-weight:800;
+background:#eef4ff;
+color:#0957d0
+}
+table{width:100%;border-collapse:collapse}
+th,td{
+padding:12px;
+border-bottom:1px solid var(--line);
+text-align:left;
+font-size:13px
+}
+footer{
+background:var(--dark);
+color:#98a2b3;
+padding:30px 5%;
+margin-top:30px
+}
+@media(max-width:850px){
+.grid,.cards,.kpis{grid-template-columns:1fr 1fr}
+}
+@media(max-width:550px){
+.grid,.cards,.kpis{grid-template-columns:1fr}
+header{display:block}
+nav{margin-top:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">CarBridge <span>Global</span></div>
+
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('cars')">Cars</button>
+<button onclick="showPage('sell')">Sell Car</button>
+<button onclick="showPage('find')">Find My Car</button>
+<button onclick="showPage('orders')">My Orders</button>
+<button onclick="showPage('admin')">Admin</button>
+</nav>
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="page">
+
+<div class="hero">
+
+<h1>Find Any Car. Anywhere.</h1>
+
+<p>
+Buy, sell and request cars across Dubai, Pakistan, Japan and other markets.
+CarBridge connects buyers and sellers and tracks the transaction workflow.
+</p>
+
+<br>
+
+<button class="primary" onclick="showPage('cars')">
+🚗 SHOP CARS
+</button>
+
+<button class="orange" onclick="showPage('sell')">
+📤 SELL YOUR CAR
+</button>
+
+</div>
+
+<div class="container">
+
+<div class="panel">
+
+<h2>🔎 Find Your Car</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>MAKE / MODEL</label>
+<input id="searchModel" placeholder="Toyota Prado">
+</div>
+
+<div class="field">
+<label>MARKET</label>
+
+<select id="searchMarket">
+<option>Any</option>
+<option>Dubai / UAE</option>
+<option>Pakistan</option>
+<option>Japan</option>
+<option>USA</option>
+</select>
+
+</div>
+
+<div class="field">
+<label>MAX PRICE AED</label>
+<input id="searchPrice" type="number" placeholder="100000">
+</div>
+
+<div class="field">
+<label>YEAR</label>
+<input id="searchYear" placeholder="2020">
+</div>
+
+</div>
+
+<br>
+
+<button class="primary" onclick="searchCars()">
+🔎 SEARCH
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🛒 How CarBridge Works</h2>
+
+<p>1️⃣ Choose a car</p>
+<p>2️⃣ Click BUY NOW</p>
+<p>3️⃣ Enter buyer information</p>
+<p>4️⃣ Review price and commission</p>
+<p>5️⃣ Create order</p>
+<p>6️⃣ Admin verifies the transaction</p>
+<p>7️⃣ Payment and shipping are handled according to the final agreement</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- CARS -->
+
+<section id="cars" class="page hidden">
+
+<div class="container">
+
+<h2>🚗 Cars For Sale</h2>
+
+<p class="muted">
+Demo marketplace inventory. Vehicle details must be independently verified.
+</p>
+
+<div id="carGrid" class="cards"></div>
+
+</div>
+
+</section>
+
+
+<!-- SELL -->
+
+<section id="sell" class="page hidden">
+
+<div class="container">
+
+<div class="panel">
+
+<h2>📤 List Your Car</h2>
+
+<p class="muted">
+Create a seller listing for CarBridge.
+</p>
+
+<div class="grid">
+
+<div class="field">
+<label>SELLER NAME</label>
+<input id="sellerName">
+</div>
+
+<div class="field">
+<label>WHATSAPP</label>
+<input id="sellerPhone">
+</div>
+
+<div class="field">
+<label>CAR MAKE & MODEL</label>
+<input id="sellerCar" placeholder="Toyota Prado">
+</div>
+
+<div class="field">
+<label>YEAR</label>
+<input id="sellerYear" type="number">
+</div>
+
+<div class="field">
+<label>PRICE AED</label>
+<input id="sellerPrice" type="number">
+</div>
+
+<div class="field">
+<label>MARKET</label>
+
+<select id="sellerMarket">
+<option>Dubai / UAE</option>
+<option>Pakistan</option>
+<option>Japan</option>
+<option>USA</option>
+</select>
+
+</div>
+
+</div>
+
+<br>
+
+<button class="primary" onclick="submitListing()">
+📤 SUBMIT LISTING
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FIND MY CAR -->
+
+<section id="find" class="page hidden">
+
+<div class="container">
+
+<div class="panel">
+
+<h2>🚨 Find My Car</h2>
+
+<div class="grid">
+
+<div class="field">
+<label>NAME</label>
+<input id="buyerName">
+</div>
+
+<div class="field">
+<label>WHATSAPP</label>
+<input id="buyerPhone">
+</div>
+
+<div class="field">
+<label>CAR</label>
+<input id="wantedCar" placeholder="Toyota Aqua">
+</div>
+
+<div class="field">
+<label>YEAR</label>
+<input id="wantedYear">
+</div>
+
+<div class="field">
+<label>BUDGET</label>
+<input id="wantedBudget">
+</div>
+
+<div class="field">
+<label>DESTINATION</label>
+<input id="wantedDestination" placeholder="Dubai">
+</div>
+
+</div>
+
+<br>
+
+<button class="primary" onclick="submitBuyerRequest()">
+🚨 SUBMIT REQUEST
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders" class="page hidden">
+
+<div class="container">
+
+<h2>📦 My Orders</h2>
+
+<div class="panel">
+
+<div id="ordersList"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ADMIN -->
+
+<section id="admin" class="page hidden">
+
+<div class="container">
+
+<h2>👨‍💼 Admin Dashboard</h2>
+
+<div class="kpis">
+
+<div class="kpi">
+Buyer Orders
+<b id="orderCount">0</b>
+</div>
+
+<div class="kpi">
+Car Listings
+<b id="listingCount">0</b>
+</div>
+
+<div class="kpi">
+Buyer Requests
+<b id="requestCount">0</b>
+</div>
+
+<div class="kpi">
+Commission
+<b id="commissionTotal">AED 0</b>
+</div>
+
+</div>
+
+<div class="panel">
+
+<h3>📦 Orders</h3>
+
+<div style="overflow:auto">
+
+<table>
+
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Car</th>
+<th>Price</th>
+<th>Commission</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody id="adminOrders"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h3>📤 Seller Listings</h3>
+
+<div id="adminListings"></div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- BUY MODAL -->
+
+<div id="buyModal" class="modal">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeModal()">×</button>
+
+<div id="buyContent"></div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+<b>CarBridge Global</b>
+
+<br><br>
+
+Find Any Car. Anywhere.
+
+<br><br>
+
+<small>
+Prototype marketplace. Payment, inspection, customs, ownership transfer and shipping
+must be independently verified and handled through appropriate providers.
+</small>
+
+</footer>
+
+
+<script>
+
+const cars=[
+
+{
+id:1,
+emoji:"🚙",
+name:"Toyota Prado 2021",
+price:125000,
+market:"Dubai / UAE",
+year:2021,
+seller:"Verified Seller"
+},
+
+{
+id:2,
+emoji:"🚘",
+name:"Toyota Land Cruiser 2022",
+price:185000,
+market:"Dubai / UAE",
+year:2022,
+seller:"Dealer"
+},
+
+{
+id:3,
+emoji:"🚗",
+name:"Toyota Aqua 2014",
+price:9000,
+market:"Japan",
+year:2014,
+seller:"Export Listing"
+},
+
+{
+id:4,
+emoji:"🚗",
+name:"Daihatsu Mira 2014",
+price:6000,
+market:"Japan",
+year:2014,
+seller:"Export Listing"
+},
+
+{
+id:5,
+emoji:"🛻",
+name:"Toyota Hilux 2020",
+price:78000,
+market:"Dubai / UAE",
+year:2020,
+seller:"Dealer"
+},
+
+{
+id:6,
+emoji:"🚘",
+name:"Mercedes G-Class 2022",
+price:420000,
+market:"Dubai / UAE",
+year:2022,
+seller:"Dealer"
+}
+
+];
+
+
+function money(n){
+
+return Number(n).toLocaleString("en-US");
+
+}
+
+
+function showPage(id){
+
+document.querySelectorAll(".page")
+.forEach(p=>p.classList.add("hidden"));
+
+document.getElementById(id)
+.classList.remove("hidden");
+
+if(id==="cars") renderCars(cars);
+
+if(id==="orders") renderOrders();
+
+if(id==="admin") renderAdmin();
+
+window.scrollTo(0,0);
+
+}
+
+
+function renderCars(list){
+
+const grid=document.getElementById("carGrid");
+
+grid.innerHTML=list.map(c=>`
+
+<div class="card car-card">
+
+<div class="photo">
+${c.emoji}
+</div>
+
+<div class="body">
+
+<span class="badge">
+${c.seller}
+</span>
+
+<h3>${c.name}</h3>
+
+<p class="muted">
+${c.year} • ${c.market}
+</p>
+
+<div class="price">
+AED ${money(c.price)}
+</div>
+
+<br>
+
+<button class="primary"
+onclick="openBuy(${c.id})">
+
+🛒 BUY NOW
+
+</button>
+
+<button class="gray"
+onclick="showDetails(${c.id})">
+
+📄 DETAILS
+
+</button>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+
+function searchCars(){
+
+const model=
+document.getElementById("searchModel")
+.value.toLowerCase();
+
+const market=
+document.getElementById("searchMarket")
+.value;
+
+const max=
+Number(document.getElementById("searchPrice").value)||Infinity;
+
+const year=
+document.getElementById("searchYear").value;
+
+const result=cars.filter(c=>
+
+(!model || c.name.toLowerCase().includes(model)) &&
+
+(market==="Any" || c.market===market) &&
+
+c.price<=max &&
+
+(!year || String(c.year).includes(year))
+
+);
+
+showPage("cars");
+
+renderCars(result.length?result:cars);
+
+}
+
+
+function showDetails(id){
+
+const c=cars.find(x=>x.id===id);
+
+alert(
+
+c.name+
+"\nYear: "+c.year+
+"\nMarket: "+c.market+
+"\nPrice: AED "+money(c.price)+
+"\nSeller: "+c.seller+
+"\n\nVehicle documents and condition must be independently verified."
+
+);
+
+}
+
+
+function openBuy(id){
+
+const c=cars.find(x=>x.id===id);
+
+const commission=c.price*0.01;
+
+document.getElementById("buyContent").innerHTML=`
+
+<h2>🛒 Buy ${c.name}</h2>
+
+<p>
+Market: <b>${c.market}</b>
+</p>
+
+<p>
+Vehicle price:
+<strong>AED ${money(c.price)}</strong>
+</p>
+
+<div class="total">
+
+<p>
+Vehicle Price:
+AED ${money(c.price)}
+</p>
+
+<p>
+CarBridge example commission (1%):
+AED ${money(commission)}
+</p>
+
+<hr>
+
+<h3>
+Transaction reference total:
+AED ${money(c.price+commission)}
+</h3>
+
+<small>
+Final commission, taxes, shipping and other charges must be agreed before payment.
+</small>
+
+</div>
+
+
+<h3>Buyer Information</h3>
+
+<div class="field">
+
+<label>FULL NAME</label>
+
+<input id="buyName">
+
+</div>
+
+
+<div class="field">
+
+<label>WHATSAPP / PHONE</label>
+
+<input id="buyPhone">
+
+</div>
+
+
+<div class="field">
+
+<label>DELIVERY COUNTRY</label>
+
+<select id="buyCountry">
+
+<option>UAE</option>
+<option>Pakistan</option>
+<option>Afghanistan</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="field">
+
+<label>DELIVERY CITY</label>
+
+<input id="buyCity" placeholder="Dubai / Karachi / Quetta">
+
+</div>
+
+
+<div class="field">
+
+<label>SHIPPING REQUIRED?</label>
+
+<select id="shipping">
+
+<option>Yes</option>
+<option>No</option>
+</select>
+
+</div>
+
+
+<button class="green"
+onclick="createOrder(${c.id})">
+
+💳 CREATE BUY ORDER
+
+</button>
+
+`;
+
+document.getElementById("buyModal")
+.classList.add("open");
+
+}
+
+
+function closeModal(){
+
+document.getElementById("buyModal")
+.classList.remove("open");
+
+}
+
+
+function createOrder(id){
+
+const c=cars.find(x=>x.id===id);
+
+const name=document.getElementById("buyName").value.trim();
+
+const phone=document.getElementById("buyPhone").value.trim();
+
+const country=document.getElementById("buyCountry").value;
+
+const city=document.getElementById("buyCity").value.trim();
+
+const shipping=document.getElementById("shipping").value;
+
+if(!name || !phone || !city){
+
+alert("Please complete buyer information.");
+
+return;
+
+}
+
+
+const commission=c.price*0.01;
+
+const order={
+
+id:"CB-"+Date.now(),
+
+car:c.name,
+
+price:c.price,
+
+commission:commission,
+
+buyer:name,
+
+phone:phone,
+
+country:country,
+
+city:city,
+
+shipping:shipping,
+
+status:"Order Request"
+
+};
+
+
+const orders=
+
+JSON.parse(localStorage.getItem("cb_orders")||"[]");
+
+orders.push(order);
+
+localStorage.setItem(
+"cb_orders",
+JSON.stringify(orders)
+);
+
+closeModal();
+
+alert(
+
+"Order created successfully!\n\n"+
+"Order ID: "+order.id+
+"\nCar: "+order.car+
+"\nStatus: Order Request"
+
+);
+
+showPage("orders");
+
+}
+
+
+function renderOrders(){
+
+const orders=
+
+JSON.parse(localStorage.getItem("cb_orders")||"[]");
+
+const box=document.getElementById("ordersList");
+
+if(!orders.length){
+
+box.innerHTML=
+
+"<p class='muted'>No orders yet.</p>";
+
+return;
+
+}
+
+
+box.innerHTML=orders.map(o=>`
+
+<div class="card">
+
+<h3>${o.car}</h3>
+
+<p>
+<b>Order ID:</b> ${o.id}
+</p>
+
+<p>
+Vehicle Price:
+AED ${money(o.price)}
+</p>
+
+<p>
+CarBridge Commission:
+AED ${money(o.commission)}
+</p>
+
+<p>
+Delivery:
+${o.city}, ${o.country}
+</p>
+
+<p>
+Shipping:
+${o.shipping}
+</p>
+
+<p>
+Status:
+<span class="status">${o.status}</span>
+</p>
+
+</div>
+
+`).join("");
+
+}
+
+
+function submitListing(){
+
+const name=document.getElementById("sellerName").value;
+
+const phone=document.getElementById("sellerPhone").value;
+
+const car=document.getElementById("sellerCar").value;
+
+const year=document.getElementById("sellerYear").value;
+
+const price=Number(
+document.getElementById("sellerPrice").value
+);
+
+const market=document.getElementById("sellerMarket").value;
+
+
+if(!name||!phone||!car||!year||!price){
+
+alert("Complete all seller fields.");
+
+return;
+
+}
+
+
+const listings=
+
+JSON.parse(localStorage.getItem("cb_listings")||"[]");
+
+listings.push({
+
+id:"L-"+Date.now(),
+
+seller:name,
+
+phone:phone,
+
+car:car,
+
+year:year,
+
+price:price,
+
+market:market,
+
+status:"Pending Verification"
+
+});
+
+
+localStorage.setItem(
+"cb_listings",
+JSON.stringify(listings)
+);
+
+
+alert(
+"Listing submitted.\n\n"+
+"It must be verified before publication."
+);
+
+
+}
+
+
+function submitBuyerRequest(){
+
+const request={
+
+id:"REQ-"+Date.now(),
+
+name:document.getElementById("buyerName").value,
+
+phone:document.getElementById("buyerPhone").value,
+
+car:document.getElementById("wantedCar").value,
+
+year:document.getElementById("wantedYear").value,
+
+budget:document.getElementById("wantedBudget").value,
+
+destination:document.getElementById("wantedDestination").value
+
+};
+
+
+const requests=
+
+JSON.parse(localStorage.getItem("cb_requests")||"[]");
+
+requests.push(request);
+
+localStorage.setItem(
+"cb_requests",
+JSON.stringify(requests)
+);
+
+
+alert("Buyer request submitted.");
+
+}
+
+
+function renderAdmin(){
+
+const orders=
+
+JSON.parse(localStorage.getItem("cb_orders")||"[]");
+
+const listings=
+
+JSON.parse(localStorage.getItem("cb_listings")||"[]");
+
+document.getElementById("orderCount")
+.textContent=orders.length;
+
+document.getElementById("listingCount")
+.textContent=listings.length;
+
+const commission=
+
+orders.reduce(
+(sum,o)=>sum+Number(o.commission||0),
+0
+);
+
+document.getElementById("commissionTotal")
+.textContent="AED "+money(commission);
+
+
+document.getElementById("adminOrders").innerHTML=
+
+orders.length?
+
+orders.map(o=>`
+
+<tr>
+
+<td>${o.id}</td>
+
+<td>${o.car}</td>
+
+<td>AED ${money(o.price)}</td>
+
+<td>AED ${money(o.commission)}</td>
+
+<td>
+<span class="status">${o.status}</span>
+</td>
+
+</tr>
+
+`).join("")
+
+:
+
+"<tr><td colspan='5'>No orders yet.</td></tr>";
+
+
+document.getElementById("adminListings").innerHTML=
+
+listings.length?
+
+listings.map(l=>`
+
+<div class="card">
+
+<h3>${l.car}</h3>
+
+<p>
+Seller: ${l.seller}
+</p>
+
+<p>
+Price: AED ${money(l.price)}
+</p>
+
+<p>
+Market: ${l.market}
+</p>
+
+<span class="status">
+${l.status}
+</span>
+
+</div>
+
+`).join("")
+
+:
+
+"<p class='muted'>No seller listings yet.</p>";
+
+}
+
+
+renderCars(cars);
+
+</script>
+
+</body>
+</html>
