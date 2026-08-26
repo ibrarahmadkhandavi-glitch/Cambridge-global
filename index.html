@@ -1,157 +1,354 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CarBridge Global — Find Any Car. Anywhere.</title>
+<meta name="description" content="CarBridge Global connects car buyers with verified dealers and exporters across Pakistan, Dubai and Japan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#f5f7fb;--card:#fff;--ink:#101828;--muted:#667085;--line:#e4e7ec;--brand:#0b63f6;--dark:#0b1220;--ok:#12b76a;--warn:#f79009}
-*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--dark);color:#fff;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:16px;position:sticky;top:0;z-index:5}
-.logo{font-weight:800;font-size:20px}.logo span{color:#5b9cff}
-nav button{background:none;border:0;color:#d0d5dd;margin-left:10px;cursor:pointer;font-weight:600}
-.hero{background:linear-gradient(135deg,#071225,#123b7a);color:white;padding:58px 5% 50px}
-.hero h1{font-size:clamp(34px,6vw,64px);margin:0 0 12px;line-height:1}.hero p{font-size:18px;color:#d0d5dd;max-width:700px}
-.search{background:#fff;color:var(--ink);padding:20px;border-radius:18px;max-width:1050px;margin-top:28px;box-shadow:0 20px 60px #0004}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{display:flex;flex-direction:column;gap:6px}.field label{font-size:12px;font-weight:700;color:var(--muted)}input,select,textarea{padding:12px;border:1px solid var(--line);border-radius:10px;font:inherit;width:100%}
-.btn{border:0;border-radius:10px;padding:13px 17px;font-weight:800;cursor:pointer}.primary{background:var(--brand);color:#fff}.dark{background:var(--dark);color:#fff}.ghost{background:#eef4ff;color:#0957d0}
-.container{max-width:1200px;margin:auto;padding:38px 5%}.section-title{display:flex;justify-content:space-between;align-items:end;gap:10px;margin-bottom:18px}.muted{color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 5px 18px #1018280a}.photo{height:175px;background:linear-gradient(135deg,#dbeafe,#eef2f6);display:flex;align-items:center;justify-content:center;font-size:58px}.body{padding:17px}.price{font-size:22px;font-weight:900}.meta{font-size:13px;color:var(--muted);margin:6px 0 15px}.badges{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.badge{font-size:11px;padding:5px 8px;border-radius:999px;background:#ecfdf3;color:#027a48;font-weight:800}
-.panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px;margin-bottom:18px}.steps{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}.step{padding:12px 8px;border-radius:10px;background:#f2f4f7;text-align:center;font-size:12px;font-weight:800}.step.active{background:#eaf2ff;color:#0957d0}
-footer{background:var(--dark);color:#98a2b3;padding:30px 5%;margin-top:30px}
-.modal{display:none;position:fixed;inset:0;background:#0008;z-index:20;align-items:center;justify-content:center;padding:20px}.modal.open{display:flex}.modalbox{background:#fff;border-radius:18px;max-width:650px;width:100%;max-height:90vh;overflow:auto;padding:24px}.close{float:right;border:0;background:#f2f4f7;border-radius:50%;width:34px;height:34px;cursor:pointer}
-.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.kpi{background:#fff;border:1px solid var(--line);padding:18px;border-radius:14px}.kpi b{font-size:25px;display:block;margin-top:5px}
-.hidden{display:none!important}
-@media(max-width:850px){.grid,.cards,.kpis{grid-template-columns:1fr 1fr}.steps{grid-template-columns:repeat(2,1fr)}nav{display:none}}
-@media(max-width:560px){.grid,.cards,.kpis{grid-template-columns:1fr}.hero{padding-top:40px}.search{padding:15px}}
+  :root{
+    --bg:#0e1620;
+    --bg-2:#121d29;
+    --surface:#17222f;
+    --surface-2:#1d2b3a;
+    --line:#2a3a4c;
+    --text:#eef1f4;
+    --text-muted:#8a97a8;
+    --amber:#f2a93b;
+    --amber-dim:#c98a2c;
+    --teal:#2fb8ac;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+    letter-spacing:-0.01em;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* NAV */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(14,22,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:18px;}
+  .brand-mark{
+    width:28px;height:28px;border-radius:8px;
+    background:linear-gradient(135deg,var(--amber),var(--teal));
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Space Grotesk';font-weight:700;color:#0e1620;font-size:14px;
+  }
+  .nav-cta{
+    background:var(--amber);color:#1a1206;font-weight:600;
+    padding:9px 16px;border-radius:999px;font-size:14px;text-decoration:none;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .nav-cta:hover{transform:translateY(-1px);opacity:.92;}
+
+  /* HERO */
+  .hero{
+    padding:72px 0 40px;
+    position:relative;
+    overflow:hidden;
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;letter-spacing:0.08em;text-transform:uppercase;
+    color:var(--teal);
+    border:1px solid rgba(47,184,172,0.35);
+    background:rgba(47,184,172,0.08);
+    padding:6px 12px;border-radius:999px;
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(34px,6vw,58px);
+    line-height:1.05;
+    font-weight:700;
+    margin:0 0 18px;
+    max-width:16ch;
+  }
+  .hero h1 .accent{color:var(--amber);}
+  .hero p.lede{
+    color:var(--text-muted);
+    font-size:17px;line-height:1.6;
+    max-width:52ch;
+    margin:0 0 34px;
+  }
+
+  /* ROUTE — signature element */
+  .route{
+    margin:44px 0 8px;
+    padding:26px 22px 22px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+  }
+  .route-label{
+    font-family:'IBM Plex Mono';font-size:11px;color:var(--text-muted);
+    text-transform:uppercase;letter-spacing:.08em;margin-bottom:22px;
+  }
+  .route-track{
+    position:relative;
+    display:flex;justify-content:space-between;align-items:flex-start;
+    padding:0 6px;
+  }
+  .route-line{
+    position:absolute;top:9px;left:24px;right:24px;height:2px;
+    background:repeating-linear-gradient(90deg,var(--line) 0 8px, transparent 8px 14px);
+  }
+  .route-line-fill{
+    position:absolute;top:9px;left:24px;height:2px;width:0%;
+    background:linear-gradient(90deg,var(--amber),var(--teal));
+    transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+  }
+  .stop{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:33%;}
+  .stop-dot{
+    width:20px;height:20px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--amber-dim);
+    margin-bottom:12px;
+  }
+  .stop.active .stop-dot{border-color:var(--amber);box-shadow:0 0 0 4px rgba(242,169,59,0.15);}
+  .stop-flag{font-size:20px;margin-bottom:4px;}
+  .stop-name{font-weight:600;font-size:14px;}
+  .stop-note{color:var(--text-muted);font-size:12px;margin-top:2px;text-align:center;}
+
+  /* FINDER FORM */
+  .finder{
+    margin-top:56px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:28px;
+  }
+  .finder h2{font-size:20px;margin:0 0 4px;}
+  .finder .sub{color:var(--text-muted);font-size:14px;margin:0 0 22px;}
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+  }
+  @media (max-width:640px){ .grid{grid-template-columns:1fr;} }
+  .field{display:flex;flex-direction:column;gap:6px;}
+  .field label{font-size:12px;color:var(--text-muted);font-family:'IBM Plex Mono';text-transform:uppercase;letter-spacing:.04em;}
+  .field input,.field select{
+    background:var(--bg-2);
+    border:1px solid var(--line);
+    color:var(--text);
+    padding:11px 12px;
+    border-radius:9px;
+    font-size:14px;
+    font-family:'Inter';
+    outline:none;
+    transition:border-color .15s ease;
+  }
+  .field input::placeholder{color:#5c6b7d;}
+  .field input:focus,.field select:focus{border-color:var(--amber);}
+  .submit-row{
+    margin-top:22px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .btn-primary{
+    background:var(--amber);color:#1a1206;font-weight:600;font-size:15px;
+    border:none;padding:14px 24px;border-radius:10px;cursor:pointer;
+    transition:transform .15s ease, opacity .15s ease;
+  }
+  .btn-primary:hover{transform:translateY(-1px);opacity:.92;}
+  .submit-note{color:var(--text-muted);font-size:13px;}
+
+  /* TRUST / HOW IT WORKS */
+  .section{padding:64px 0;}
+  .section-head{max-width:56ch;margin-bottom:36px;}
+  .section-head .eyebrow{margin-bottom:14px;}
+  .section-head h2{font-size:clamp(24px,3.4vw,32px);margin:0 0 10px;}
+  .section-head p{color:var(--text-muted);font-size:15px;line-height:1.6;margin:0;}
+
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  @media (max-width:800px){.cards{grid-template-columns:1fr;}}
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;
+  }
+  .card .num{font-family:'IBM Plex Mono';color:var(--amber);font-size:13px;margin-bottom:14px;display:block;}
+  .card h3{font-size:16px;margin:0 0 8px;}
+  .card p{color:var(--text-muted);font-size:14px;line-height:1.55;margin:0;}
+
+  footer{
+    border-top:1px solid var(--line);
+    padding:32px 0;
+    color:var(--text-muted);font-size:13px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  }
+  footer a{color:var(--teal);text-decoration:none;}
 </style>
 </head>
 <body>
-<header>
-  <div class="logo">CarBridge <span>Global</span></div>
-  <nav>
-    <button onclick="go('home')">Home</button>
-    <button onclick="go('cars')">Cars</button>
-    <button onclick="go('request')">Find My Car</button>
-    <button onclick="go('dealer')">Dealer</button>
-    <button onclick="go('admin')">Admin</button>
-  </nav>
-</header>
 
-<section id="home" class="page">
-<div class="hero">
-  <h1>Find Any Car. Anywhere.</h1>
-  <p>Connect buyers with verified dealers and sellers across Pakistan, Dubai and Japan. Compare cars, request inspection, verify documents and track a deal.</p>
-  <div class="search">
-    <div class="grid">
-      <div class="field"><label>MAKE / MODEL</label><input id="smodel" placeholder="e.g. Toyota Prado"></div>
-      <div class="field"><label>YEAR</label><input id="syear" placeholder="2020–2022"></div>
-      <div class="field"><label>BUDGET</label><input id="sbudget" placeholder="e.g. Rs 80 lakh"></div>
-      <div class="field"><label>MARKET</label><select id="scountry"><option>Any</option><option>Pakistan</option><option>Dubai / UAE</option><option>Japan</option><option>USA</option></select></div>
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand">
+      <span class="brand-mark">CB</span>
+      CarBridge Global
     </div>
-    <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-      <button class="btn primary" onclick="searchCars()">🔎 Find Cars</button>
-      <button class="btn ghost" onclick="go('request')">🚨 I Need This Car</button>
+    <a class="nav-cta" href="#finder">Find My Car</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">● Pakistan · Dubai · Japan</span>
+    <h1>Find Any Car. <span class="accent">Anywhere.</span></h1>
+    <p class="lede">CarBridge Global connects buyers with verified dealers and exporters across borders — so you can compare a car in Karachi, Dubai and Tokyo before you decide where to buy it from.</p>
+
+    <div class="route">
+      <div class="route-label">Live corridors</div>
+      <div class="route-track">
+        <div class="route-line"></div>
+        <div class="route-line-fill" id="routeFill"></div>
+        <div class="stop active">
+          <div class="stop-flag">🇵🇰</div>
+          <div class="stop-dot"></div>
+          <div class="stop-name">Pakistan</div>
+          <div class="stop-note">Buyers</div>
+        </div>
+        <div class="stop active">
+          <div class="stop-flag">🇦🇪</div>
+          <div class="stop-dot"></div>
+          <div class="stop-name">Dubai</div>
+          <div class="stop-note">Dealers</div>
+        </div>
+        <div class="stop active">
+          <div class="stop-flag">🇯🇵</div>
+          <div class="stop-dot"></div>
+          <div class="stop-name">Japan</div>
+          <div class="stop-note">Exporters</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="finder" id="finder">
+      <h2>What car do you want?</h2>
+      <p class="sub">Tell us the details — we'll pass your request straight to our dealer network.</p>
+      <form id="carForm">
+        <div class="grid">
+          <div class="field">
+            <label for="make">Make</label>
+            <input id="make" name="make" placeholder="e.g. Toyota" required>
+          </div>
+          <div class="field">
+            <label for="model">Model</label>
+            <input id="model" name="model" placeholder="e.g. Prado" required>
+          </div>
+          <div class="field">
+            <label for="year">Year</label>
+            <input id="year" name="year" placeholder="e.g. 2020–2022">
+          </div>
+          <div class="field">
+            <label for="budget">Budget</label>
+            <input id="budget" name="budget" placeholder="e.g. Rs 80 lakh">
+          </div>
+          <div class="field">
+            <label for="country">Preferred source country</label>
+            <select id="country" name="country">
+              <option value="Any">Any</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Dubai (UAE)">Dubai (UAE)</option>
+              <option value="Japan">Japan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="destination">Destination city</label>
+            <input id="destination" name="destination" placeholder="e.g. Quetta">
+          </div>
+        </div>
+        <div class="submit-row">
+          <button type="submit" class="btn-primary">🔎 Find My Car</button>
+          <span class="submit-note">Opens WhatsApp with your request pre-filled — no account needed.</span>
+        </div>
+      </form>
     </div>
   </div>
-</div>
-
-<div class="container">
-  <div class="section-title"><div><h2>How Deal Now works</h2><div class="muted">The transaction stays tracked from request to completion.</div></div></div>
-  <div class="steps">
-    <div class="step active">1<br>Find Car</div><div class="step">2<br>Deal Now</div><div class="step">3<br>Seller Accepts</div><div class="step">4<br>Inspection</div><div class="step">5<br>Documents</div><div class="step">6<br>Payment</div><div class="step">7<br>Commission</div>
-  </div>
-</div>
 </section>
 
-<section id="cars" class="page hidden">
-<div class="container">
-  <div class="section-title"><div><h2>Cars</h2><div class="muted">Demo inventory — replace with verified dealer feeds/listings.</div></div><button class="btn primary" onclick="go('request')">Find My Car</button></div>
-  <div id="carGrid" class="cards"></div>
-</div>
-</section>
-
-<section id="request" class="page hidden">
-<div class="container">
-  <div class="panel">
-    <h2>🚨 Find My Car</h2><p class="muted">Tell us exactly what you want. A dealer/broker can match the request.</p>
-    <div class="grid">
-      <div class="field"><label>NAME</label><input id="rname"></div>
-      <div class="field"><label>WHATSAPP / PHONE</label><input id="rphone"></div>
-      <div class="field"><label>CAR</label><input id="rcar" placeholder="Toyota Aqua / Mira"></div>
-      <div class="field"><label>YEAR</label><input id="ryear" placeholder="2014"></div>
-      <div class="field"><label>BUDGET</label><input id="rbudget" placeholder="Rs 9 lakh"></div>
-      <div class="field"><label>DESTINATION</label><input id="rdest" placeholder="Pishin / Afghanistan"></div>
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">How it works</span>
+      <h2>One request, three markets checked</h2>
+      <p>You send one requirement. We match it against dealer and exporter inventory in every corridor we cover, then bring you the best estimated landed cost.</p>
     </div>
-    <div class="field" style="margin-top:12px"><label>NOTES</label><textarea id="rnotes" rows="4" placeholder="NCP requested? inspection? COD preference?"></textarea></div>
-    <button class="btn primary" style="margin-top:14px" onclick="submitRequest()">Submit Buyer Request</button>
-  </div>
-  <div class="panel"><h3>Suggested first-market routes</h3><p>🇵🇰 Pakistan ↔ 🇦🇪 Dubai &nbsp; • &nbsp; 🇵🇰 Pakistan ↔ 🇯🇵 Japan</p></div>
-</div>
-</section>
-
-<section id="dealer" class="page hidden">
-<div class="container">
-  <div class="panel">
-    <h2>🏢 Dealer / Seller</h2>
-    <p class="muted">Register interest. Production version will require identity/business verification before a “Verified Dealer” badge.</p>
-    <div class="grid">
-      <div class="field"><label>BUSINESS NAME</label><input id="dname"></div>
-      <div class="field"><label>COUNTRY</label><select id="dcountry"><option>Dubai / UAE</option><option>Japan</option><option>Pakistan</option><option>USA</option></select></div>
-      <div class="field"><label>WHATSAPP</label><input id="dphone"></div>
-      <div class="field"><label>EMAIL</label><input id="demail"></div>
+    <div class="cards">
+      <div class="card">
+        <span class="num mono">01</span>
+        <h3>Send your requirement</h3>
+        <p>Make, model, year, budget and where you want the car delivered.</p>
+      </div>
+      <div class="card">
+        <span class="num mono">02</span>
+        <h3>We match it</h3>
+        <p>Your request is checked against dealer and exporter listings in Pakistan, Dubai and Japan.</p>
+      </div>
+      <div class="card">
+        <span class="num mono">03</span>
+        <h3>Compare and decide</h3>
+        <p>See estimated landed cost per market side by side, then choose where to buy from.</p>
+      </div>
     </div>
-    <button class="btn primary" style="margin-top:14px" onclick="submitDealer()">Register Dealer Interest</button>
   </div>
-</div>
-</section>
-
-<section id="admin" class="page hidden">
-<div class="container">
-  <div class="section-title"><div><h2>Admin Dashboard</h2><div class="muted">Prototype data is stored only in this browser.</div></div></div>
-  <div class="kpis">
-    <div class="kpi">Buyer requests<b id="kReq">0</b></div>
-    <div class="kpi">Dealer leads<b id="kDealers">0</b></div>
-    <div class="kpi">Active deals<b id="kDeals">0</b></div>
-    <div class="kpi">Commission tracked<b id="kComm">Rs 0</b></div>
-  </div>
-  <div class="panel" style="margin-top:18px"><h3>Deal workflow</h3><div class="steps">
-    <div class="step active">Request</div><div class="step">Match</div><div class="step">Seller Accept</div><div class="step">Inspect</div><div class="step">Documents</div><div class="step">Payment</div><div class="step">Complete</div>
-  </div></div>
-  <div class="panel"><h3>Important production rule</h3><p>Do not hold buyer/seller money in this prototype. Production payments should use a properly licensed payment/escrow partner and local legal/compliance review. Cash deals require buyer/seller confirmation and a written brokerage agreement.</p></div>
-</div>
 </section>
 
 <footer>
-  <b>CarBridge Global</b><br>
-  Find Any Car. Anywhere.<br><br>
-  <small>Prototype/MVP. Vehicle, customs, inspection and payment information must be independently verified before a live transaction.</small>
+  <div class="wrap" style="display:flex;justify-content:space-between;width:100%;flex-wrap:wrap;gap:12px;">
+    <span>© <span id="year"></span> CarBridge Global — Find Any Car. Anywhere.</span>
+    <a href="https://wa.me/00000000000" id="footerWhatsapp">Contact us on WhatsApp</a>
+  </div>
 </footer>
 
-<div id="modal" class="modal"><div class="modalbox">
-<button class="close" onclick="closeModal()">×</button>
-<div id="modalContent"></div>
-</div></div>
-
 <script>
-const cars=[
- {id:1,emoji:"🚙",name:"Toyota Prado 2021",price:"AED 125,000",market:"Dubai / UAE",tag:"Verified Seller",fee:"1% brokerage example"},
- {id:2,emoji:"🚗",name:"Toyota Aqua 2014",price:"Rs 9 lakh target",market:"Japan",tag:"Export Request",fee:"Inspection required"},
- {id:3,emoji:"🚗",name:"Daihatsu Mira 2014",price:"Rs 6 lakh target",market:"Japan",tag:"Export Request",fee:"Inspection required"},
- {id:4,emoji:"🛻",name:"Toyota Hilux 2020",price:"AED 78,000",market:"Dubai / UAE",tag:"Dealer Listing",fee:"Deal Now available"}
-];
-function renderCars(list=cars){
- document.getElementById('carGrid').innerHTML=list.map(c=>`<div class="card"><div class="photo">${c.emoji}</div><div class="body"><h3>${c.name}</h3><div class="price">${c.price}</div><div class="meta">${c.market}</div><div class="badges"><span class="badge">${c.tag}</span></div><button class="btn primary" onclick="dealNow(${c.id})">🚗 Deal Now</button></div></div>`).join('');
-}
-function go(id){document.querySelectorAll('.page').forEach(x=>x.classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id==='cars')renderCars();if(id==='admin')updateAdmin();window.scrollTo({top:0,behavior:'smooth'});}
-function searchCars(){const q=document.getElementById('smodel').value.toLowerCase();const country=document.getElementById('scountry').value;let list=cars.filter(c=>(!q||c.name.toLowerCase().includes(q))&&(country==='Any'||c.market===country));go('cars');renderCars(list.length?list:cars);}
-function dealNow(id){const c=cars.find(x=>x.id===id);document.getElementById('modalContent').innerHTML=`<h2>🚗 Deal Now</h2><p><b>${c.name}</b></p><p>Market: ${c.market}<br>Listed/target price: ${c.price}</p><div class="panel"><b>Transaction steps</b><p>1. Buyer request → 2. Seller acceptance → 3. Independent inspection → 4. Document verification → 5. Agreed payment/settlement → 6. Ownership transfer → 7. Brokerage settlement.</p></div><div class="field"><label>YOUR NAME</label><input id="dealName"></div><div class="field" style="margin-top:10px"><label>WHATSAPP</label><input id="dealPhone"></div><button class="btn primary" style="margin-top:14px" onclick="submitDeal('${c.name.replace(/'/g,"\\'")}')">Submit Deal Request</button>`;openModal();}
-function submitDeal(car){let a=JSON.parse(localStorage.getItem('cb_deals')||'[]');a.push({car,name:document.getElementById('dealName').value,phone:document.getElementById('dealPhone').value,status:'New'});localStorage.setItem('cb_deals',JSON.stringify(a));closeModal();alert('Deal request saved in this prototype.');updateAdmin();}
-function submitRequest(){let a=JSON.parse(localStorage.getItem('cb_requests')||'[]');a.push({name:rname.value,phone:rphone.value,car:rcar.value,year:ryear.value,budget:rbudget.value,dest:rdest.value,notes:rnotes.value,status:'New'});localStorage.setItem('cb_requests',JSON.stringify(a));alert('Buyer request saved.');document.querySelectorAll('#request input,#request textarea').forEach(x=>x.value='');updateAdmin();}
-function submitDealer(){let a=JSON.parse(localStorage.getItem('cb_dealers')||'[]');a.push({name:dname.value,country:dcountry.value,phone:dphone.value,email:demail.value,status:'Pending verification'});localStorage.setItem('cb_dealers',JSON.stringify(a));alert('Dealer interest saved.');updateAdmin();}
-function updateAdmin(){const req=JSON.parse(localStorage.getItem('cb_requests')||'[]'),de=JSON.parse(localStorage.getItem('cb_dealers')||'[]'),dl=JSON.parse(localStorage.getItem('cb_deals')||'[]');document.getElementById('kReq').textContent=req.length;document.getElementById('kDealers').textContent=de.length;document.getElementById('kDeals').textContent=dl.length;document.getElementById('kComm').textContent='Rs 0';}
-function openModal(){document.getElementById('modal').classList.add('open')}function closeModal(){document.getElementById('modal').classList.remove('open')}
-renderCars();
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Animate the route line fill once, on load
+  window.addEventListener('load', function(){
+    requestAnimationFrame(function(){
+      document.getElementById('routeFill').style.width = 'calc(100% - 48px)';
+    });
+  });
+
+  // ⚠️ Replace this with your real WhatsApp Business number (country code, no + or spaces)
+  const WHATSAPP_NUMBER = "00000000000";
+
+  document.getElementById('carForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const f = new FormData(e.target);
+    const lines = [
+      "WANTED CAR",
+      `Make: ${f.get('make') || '-'}`,
+      `Model: ${f.get('model') || '-'}`,
+      `Year: ${f.get('year') || '-'}`,
+      `Budget: ${f.get('budget') || '-'}`,
+      `Preferred source: ${f.get('country') || 'Any'}`,
+      `Destination: ${f.get('destination') || '-'}`
+    ];
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
+  });
 </script>
+
 </body>
 </html>
